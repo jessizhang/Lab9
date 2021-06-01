@@ -66,7 +66,104 @@
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
+
     // TODO - Make buttons functional
+    errorBtns[0].addEventListener('click', () => {
+      console.log("Console Log Demo");
+    });
+
+    errorBtns[1].addEventListener('click', () => {
+      console.error("Console Error Demo");
+    });
+
+    errorBtns[2].addEventListener('click', () => {
+      console.dir(errorBtns[2]);
+    });
+
+    errorBtns[3].addEventListener('click', () => {
+      console.dirxml(document.body);
+    });
+
+    errorBtns[4].addEventListener('click', () => {
+      console.group('Log Group');
+    });
+
+    errorBtns[5].addEventListener('click', () => {
+      console.groupEnd('Log Group');
+    });
+
+    errorBtns[6].addEventListener('click', () => {
+      console.table([
+        {
+          class: "CSE 100", 
+          prof: "Moshiri"
+        }, 
+        {
+          class: "CSE 101", 
+          prof: "Dasgupta"
+        },
+        { 
+          class: 'CSE 110', 
+          prof: "Powell"
+        }
+      ]);
+    });
+
+    errorBtns[7].addEventListener('click', () => {
+      console.time();
+      console.log('Timer started!');
+    });
+
+    errorBtns[8].addEventListener('click', () => {
+      console.timeEnd();
+      console.log('Timer ended!');
+    });
+
+    errorBtns[9].addEventListener('click', () => {
+      const test = () => { first(); };
+      const first = () => { second(); };
+      const second = () => { third(); };
+      const third = () => { console.trace(); };
+      test();
+    });
+
+    errorBtns[10].addEventListener('click', () => {
+      window.onerror = function(msg, url, line, col, err) {
+        console.log('This is a global error');
+      };
+
+      calculatebtn[0];
+    });
+
+    class conversionError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'calculatorError';
+      };
+    }
+
+    document.getElementById('calculate').addEventListener('click', () => {
+      try {
+        console.log(eval(`${document.querySelector('#first-num').value} 
+        ${document.querySelector('#operator').value} 
+        ${document.querySelector('#second-num').value}`));
+      }
+      catch(err) {
+        throw new conversionError('Not a possible operation');
+      }
+      finally {
+        console.log(document.querySelector('#first-num').value +
+        document.querySelector('#operator').value +
+        document.querySelector('#second-num').value);
+      }
+    }); 
   </script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "04b3a1661d3e4bd3a9bf306198168444"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>  
 </body>
 </html>
